@@ -31,8 +31,8 @@ public:
     void establish_connection();
 
     void send_request(service_request message);
-    void request_weather(int);
-    void request_currency(int);
+    void request_weather(string);
+    void request_currency(string);
     weather_response read_weather_response();
     currency_response read_currency_response();
     void set_queueid(int id);

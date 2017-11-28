@@ -5,6 +5,7 @@
 
 #include "./src/message/messages.h"
 #include "./src/utils/utils.h"
+#include "src/message/messages.h"
 
 
 using namespace std;
@@ -56,6 +57,8 @@ int main(int argc, char** argv) {
     if (bytes < 0)
         EXIT();
     std::cout << "Mensage recibido: " << mensaje.mtype << '\n';
+
+    std::cout << "Mensage es: " << mensaje.mtype << '\n';
 
 
     // Respuesta

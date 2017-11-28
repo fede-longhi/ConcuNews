@@ -132,7 +132,12 @@ void Server::handle_client_request() {
             std::cout<<"Solicitud de tiempo"<<std::endl;
             std::cout<<"Ciudad: "<<request.code<<std::endl;
             //TODO look for weather in weather service
-            this->send_weather_response(request.client_id, request.code);
+
+            this->send_weather_request(request.code);
+
+            weather_response response = this->read_weather_response();
+
+            this->send_weather_response(request.client_id, response);
             std::cout<<"Respuesta enviada"<<std::endl;
         }else if (request.mtype == CURRENCY_CODE){
             std::cout<<"Solicitud de moneda"<<std::endl;
@@ -146,28 +151,45 @@ void Server::handle_client_request() {
 }
 
 service_request Server::read_client_request(int code) {
-    std::cout<<"leyendo request"<<std::endl;
+    std::cout<<"Por leer request"<<std::endl;
     service_request request{};
     ssize_t bytes = msgrcv(this->client_queue_id, &request, sizeof(request)-sizeof(long), code, 0);
     if (bytes < 0) EXIT();
     return request;
 }
 
-void Server::send_weather_response(int client_id, int ciudad) {
+void Server::send_weather_request(string ciudad) {
+
+    s_request request;
+    request.mtype = SERVICE_REQUEST;
+    std::strcpy(request.code, ciudad.c_str());
+//    int send_result = msgsnd(ID_WEATHER_SERVICE, &request, sizeof(request)-sizeof(long), 0);
+//    if (send_result < 0) EXIT();
+
+}
+
+weather_response Server::read_weather_response() {
+
+    std::cout<<"Por leer request"<<std::endl;
     weather_response response{};
-    response.mtype = client_id + WEATHER_CODE;
-    response.temperature = 30;
-    response.pressure = 1024;
-    response.code = ciudad;
+//    ssize_t bytes = msgrcv(ID_WEATHER_SERVICE, &response, sizeof(response)-sizeof(long), NO ESTOY SEGURO QUE VA ACA, 0);
+//    if (bytes < 0) EXIT();
+    return response;
+
+
+}
+
+
+void Server::send_weather_response(int client_id, weather_response response) {
     int send_result = msgsnd(this->client_queue_id, &response, sizeof(response)-sizeof(long), 0);
     if (send_result < 0) EXIT();
 }
 
-void Server::send_currency_response(int client_id, int moneda) {
+void Server::send_currency_response(int client_id, string moneda) {
     currency_response response{};
     response.mtype = client_id + CURRENCY_CODE;
     response.value = 30;
-    response.code = moneda;
+    std::strcpy(response.coin, moneda.c_str());
     int send_result = msgsnd(this->client_queue_id, &response, sizeof(response)-sizeof(long), 0);
     if (send_result < 0) EXIT();
 }

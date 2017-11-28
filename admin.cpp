@@ -33,14 +33,14 @@ int main(int argc, char** argv) {
     admin_request weather{};
     weather.pressure = 1024;
     weather.temperature = 23.4;
-    weather.city = 1;
+    std::strcpy(weather.city, "Buenos Aires");
     weather.hummidity = 20.3;
     admin->update_weather(weather);
 
     std::cout << "Update Currency" <<std::endl;
     admin_request currency{};
     currency.value = 10.2;
-    currency.coin = 1;
+    std::strcpy(weather.city, "Dolar");
     admin->update_currency(currency);
 
     std::cout << "Cerrando servidor" << std::endl;

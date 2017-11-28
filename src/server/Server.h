@@ -64,8 +64,18 @@ public:
 
     void handle_connection_request();
     service_request read_client_request(int);
-    void send_weather_response(int, int);
-    void send_currency_response(int, int);
+
+
+    void send_weather_response(int client_id, weather_response response);
+    void send_currency_response(int, string);
+
+    void send_weather_request(string);
+    void send_currency_request(string);
+
+    weather_response read_weather_response();
+    currency_response read_currency_response();
+
+
     void handle_client_request();
     void handle_admin_request();
     void run();
@@ -73,6 +83,7 @@ public:
     bool is_running();
 
     void stop_running();
+
 };
 
 

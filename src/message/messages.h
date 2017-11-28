@@ -50,22 +50,29 @@ typedef struct {
 
 typedef struct {
     long mtype; //service_request
-    int code;
+    char code[50];
     int client_id;
     //string r;
 }service_request;
 
 typedef struct {
     long mtype; //id + WEATHER_CODE
-    int code; //codigo resultado
+    char city[50];
+    //codigo resultado
     float temperature;
     float pressure;
     float humidity;
 }weather_response;
 
 typedef struct {
+    float temperature;
+    float pressure;
+    float humidity;
+}weather_data;
+
+typedef struct {
     long mtype;
-    int code;//codigo resultado
+    char coin[50];//codigo resultado
     float value;
 }currency_response;
 
@@ -77,17 +84,17 @@ typedef struct {
 typedef struct {
     long mtype;
     int code;
-    int city;
+    char city[50];
     float temperature;
     float pressure;
     float hummidity;
     float value;
-    int coin;
+    char coin[50];
 }admin_request;
 
 typedef struct{
     long mtype;
-    int code;
+    char code[50];
 }s_request;
 
 

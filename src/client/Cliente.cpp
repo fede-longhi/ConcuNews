@@ -69,17 +69,17 @@ void Cliente::send_request(service_request message) {
     }
 }
 
-void Cliente::request_weather(int code) {
+void Cliente::request_weather(string city) {
     service_request message{};
     message.mtype = WEATHER_CODE;
-    message.code = code;
+    std::strcpy(message.code, city.c_str());
     this->send_request(message);
 }
 
-void Cliente::request_currency(int code){
+void Cliente::request_currency(string coin){
     service_request message{};
     message.mtype = CURRENCY_CODE;
-    message.code = code;
+    std::strcpy(message.code, coin.c_str());
     this->send_request(message);
 }
 

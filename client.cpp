@@ -30,12 +30,12 @@ int main(int argc, char** argv) {
     std::cout << "Conexion establecida - id asociado: "<<  client->get_id() << std::endl;
 
     std::cout << "Solicitando Tiempo" <<std::endl;
-    client->request_weather(1);
+    client->request_weather("Buenos Aires");
     weather_response message = client->read_weather_response();
     std::cout << "Mensaje Tiempo Recibido " <<message.temperature<<std::endl;
 
     std::cout << "Solicitando Moneda" <<std::endl;
-    client->request_currency(1);
+    client->request_currency("Dolar");
     client->read_currency_response();
     std::cout << "Mensaje Moneda recibido" <<std::endl;
 

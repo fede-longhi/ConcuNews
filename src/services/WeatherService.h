@@ -17,19 +17,29 @@
 
 #include "../message/messages.h"
 #include "../utils/utils.h"
+#include <map>
 
 
 class WeatherService {
 private:
     int queue_id;
+    std::map<std::string,weather_data> database;
+
+
 
     void create_conection_queue();
-    int read_request();
-    weather_response getInfo(int);
+    string read_request();
+    weather_response getInfo(string);
     void send_response(weather_response);
     float getPressure(int);
     float getHummidity(int);
     float getTemperature(int);
+
+    void loadDatabase();
+    void saveDatabase();
+    void addData(weather_data data, string city);
+
+
 
 public:
     WeatherService();
@@ -39,6 +49,7 @@ public:
     int getQueue_id() const;
 
     virtual ~WeatherService();
+
 };
 
 
