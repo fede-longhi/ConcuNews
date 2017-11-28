@@ -1,0 +1,8 @@
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/cmake-build-debug/CMakeFiles/weather_service.dir
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/cmake-build-debug/CMakeFiles/admin.dir
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/cmake-build-debug/CMakeFiles/currency_service.dir
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/cmake-build-debug/CMakeFiles/server.dir
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/cmake-build-debug/CMakeFiles/client.dir
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/cmake-build-debug/CMakeFiles/Proyecto2.dir

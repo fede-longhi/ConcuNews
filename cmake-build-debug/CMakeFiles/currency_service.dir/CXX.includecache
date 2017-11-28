@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/services/CurrencyService.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/currency_service.cpp
+iostream
+-
+cstring
+-
+./src/services/CurrencyService.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/services/CurrencyService.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/CurrencyService.cpp
+CurrencyService.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/CurrencyService.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/CurrencyService.h
+

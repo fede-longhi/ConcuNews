@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/admin.dir/admin.cpp.o CMakeFiles/admin.dir/src/admin/Admin.cpp.o  -o admin 

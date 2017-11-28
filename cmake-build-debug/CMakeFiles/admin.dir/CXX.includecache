@@ -1,0 +1,50 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
+ctime
+-
+string
+-
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/admin.cpp
+iostream
+-
+cstring
+-
+./src/message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
+src/admin/Admin.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/admin/Admin.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/admin/Admin.cpp
+Admin.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/admin/Admin.h
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/admin/Admin.h
+iostream
+-
+sys/msg.h
+-
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+../utils/utils.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+ctime
+-
+string
+-
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+cstring
+-
+

@@ -1,0 +1,90 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
+ctime
+-
+string
+-
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/services/WeatherService.h
+sys/ipc.h
+-
+sys/msg.h
+-
+sys/shm.h
+-
+sys/wait.h
+-
+unistd.h
+-
+iostream
+-
+cstring
+-
+fstream
+-
+set
+-
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
+../utils/utils.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/utils/utils.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/utils/utils.h
+cstring
+-
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+ctime
+-
+string
+-
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/WeatherService.cpp
+WeatherService.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/WeatherService.h
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/WeatherService.h
+sys/ipc.h
+-
+sys/msg.h
+-
+sys/shm.h
+-
+sys/wait.h
+-
+unistd.h
+-
+iostream
+-
+cstring
+-
+fstream
+-
+set
+-
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+../utils/utils.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+cstring
+-
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/weather_service.cpp
+iostream
+-
+cstring
+-
+./src/services/WeatherService.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/services/WeatherService.h
+

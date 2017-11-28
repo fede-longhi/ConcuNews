@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/weather_service.dir/weather_service.cpp.o CMakeFiles/weather_service.dir/src/services/WeatherService.cpp.o  -o weather_service 

@@ -1,0 +1,84 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
+ctime
+-
+string
+-
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/client.cpp
+iostream
+-
+cstring
+-
+./src/message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
+src/client/Cliente.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/client/Cliente.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/client/Cliente.cpp
+Cliente.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/client/Cliente.h
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+string
+-
+iostream
+-
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/client/Cliente.h
+iostream
+-
+sys/msg.h
+-
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+../utils/utils.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+ctime
+-
+string
+-
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/server/Server.cpp
+Server.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/server/Server.h
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/server/Server.h
+sys/ipc.h
+-
+sys/msg.h
+-
+sys/shm.h
+-
+sys/wait.h
+-
+unistd.h
+-
+iostream
+-
+cstring
+-
+fstream
+-
+set
+-
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+../utils/utils.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+cstring
+-
+

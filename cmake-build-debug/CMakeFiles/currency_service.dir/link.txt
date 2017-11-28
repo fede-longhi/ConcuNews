@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/currency_service.dir/currency_service.cpp.o CMakeFiles/currency_service.dir/src/services/CurrencyService.cpp.o  -o currency_service 
