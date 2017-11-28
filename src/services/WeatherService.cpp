@@ -28,7 +28,7 @@ WeatherService::WeatherService() {
 
 void WeatherService::loadDatabase() {
 
-    std::ifstream dbfile("/home/navent/Fede/ConcuNews/src/wdb.csv");
+    std::ifstream dbfile("./wdb.csv");
 
     string city;
     float temperature;
@@ -63,18 +63,15 @@ void WeatherService::saveDatabase() {
 
 
     ofstream outputFile;
-    outputFile.open("/home/navent/Fede/ConcuNews/src/program3data.txt");
+    outputFile.open("./program3data.txt");
 
     while (it != database.end()) {
-        // Accessing KEY from element pointed by it.
         std::string city = it->first;
 
-        // Accessing VALUE from element pointed by it.
         weather_data data = it->second;
 
         outputFile << city << " " <<  data.temperature << " " << data.pressure << " " << data.humidity << endl;
 
-        // Increment the Iterator to point to next entry
         it++;
     }
 

@@ -76,6 +76,7 @@ typedef struct {
     float value;
 }currency_response;
 
+
 typedef struct {
     long mtype;
     int code = CLOSE_CONNECTION;
