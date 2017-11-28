@@ -7,6 +7,10 @@
 #IncludeRegexTransform: 
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/services/CurrencyService.h
+iostream
+-
+map
+-
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/currency_service.cpp
 iostream
@@ -17,8 +21,14 @@ cstring
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/services/CurrencyService.h
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/CurrencyService.cpp
+fstream
+-
 CurrencyService.h
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/CurrencyService.h
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/CurrencyService.h
+iostream
+-
+map
+-
 

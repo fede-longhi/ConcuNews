@@ -4,6 +4,7 @@
 CMakeFiles/Proyecto2.dir/main.cpp.o: .././src/message/messages.h
 CMakeFiles/Proyecto2.dir/main.cpp.o: .././src/utils/utils.h
 CMakeFiles/Proyecto2.dir/main.cpp.o: ../main.cpp
+CMakeFiles/Proyecto2.dir/main.cpp.o: ../src/message/messages.h
 
 CMakeFiles/Proyecto2.dir/src/client/Cliente.cpp.o: ../src/client/Cliente.cpp
 CMakeFiles/Proyecto2.dir/src/client/Cliente.cpp.o: ../src/client/Cliente.h

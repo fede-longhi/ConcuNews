@@ -35,6 +35,8 @@ set
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
 ../utils/utils.h
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/utils/utils.h
+map
+-
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/utils/utils.h
 cstring
@@ -51,6 +53,8 @@ WeatherService.h
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/WeatherService.h
 ../message/messages.h
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+fstream
+-
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/WeatherService.h
 sys/ipc.h
@@ -75,6 +79,8 @@ set
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
 ../utils/utils.h
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+map
+-
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
 cstring
