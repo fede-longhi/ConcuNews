@@ -8,6 +8,8 @@
 #include <ctime>
 #include <string>
 
+#define N 50
+
 /* ********** Connection Messages **** */
 #define CONNECTION_REQUEST_ID 1
 #define CONNECTION_ADMIN_REQUEST 2
@@ -50,9 +52,8 @@ typedef struct {
 
 typedef struct {
     long mtype; //service_request
-    char code[50];
+    char code[N];
     int client_id;
-    //string r;
 }service_request;
 
 typedef struct {
@@ -72,7 +73,7 @@ typedef struct {
 
 typedef struct {
     long mtype;
-    char coin[50];//codigo resultado
+    char coin[N];//codigo resultado
     float value;
 }currency_response;
 
@@ -85,17 +86,17 @@ typedef struct {
 typedef struct {
     long mtype;
     int code;
-    char city[50];
+    char city[N];
     float temperature;
     float pressure;
     float hummidity;
     float value;
-    char coin[50];
+    char coin[N];
 }admin_request;
 
 typedef struct{
     long mtype;
-    char code[50];
+    char code[N];
 }s_request;
 
 

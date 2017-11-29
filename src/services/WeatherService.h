@@ -25,8 +25,6 @@ private:
     int queue_id;
     std::map<std::string,weather_data> database;
 
-
-
     void create_conection_queue();
     string read_request();
     weather_response getInfo(string);

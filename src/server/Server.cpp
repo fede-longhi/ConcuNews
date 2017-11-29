@@ -5,7 +5,7 @@
 #include "Server.h"
 #include "../message/messages.h"
 
-Server::Server() {
+Server::Server(int weather_id, int currency_id) {
     this->create_conection_queue();
     this->create_client_queue();
     this->create_admin_queue();
@@ -15,6 +15,8 @@ Server::Server() {
     *this->admin_id = LAST_ADMIN_PROTECTED_ID + 1;
     this->create_running();
     *this->running = false;
+    this->weather_id = weather_id;
+    this->currency_id = currency_id;
 }
 
 Server::~Server() {
@@ -131,18 +133,22 @@ void Server::handle_client_request() {
         if (request.mtype == WEATHER_CODE){
             std::cout<<"Solicitud de tiempo"<<std::endl;
             std::cout<<"Ciudad: "<<request.code<<std::endl;
-            //TODO look for weather in weather service
 
+            //Comunicacion con el servicio
             this->send_weather_request(request.code);
-
             weather_response response = this->read_weather_response();
 
             this->send_weather_response(request.client_id, response);
             std::cout<<"Respuesta enviada"<<std::endl;
         }else if (request.mtype == CURRENCY_CODE){
             std::cout<<"Solicitud de moneda"<<std::endl;
-            //TODO look for currency in currency service
-            this->send_currency_response(request.client_id, request.code);
+            std::cout<<"Moneda: "<<request.code<<std::endl;
+
+            //Comunicacion con el servicio
+            this->send_currency_request(request.code);
+            currency_response response = this->read_currency_response();
+
+            this->send_currency_response(request.client_id, response);
             std::cout<<"Respuesta enviada"<<std::endl;
         }else{
             std::cout<<"Error: codigo de mensaje invalido"<<std::endl;
@@ -159,37 +165,43 @@ service_request Server::read_client_request(int code) {
 }
 
 void Server::send_weather_request(string ciudad) {
-
-    s_request request;
+    s_request request{};
     request.mtype = SERVICE_REQUEST;
     std::strcpy(request.code, ciudad.c_str());
-//    int send_result = msgsnd(ID_WEATHER_SERVICE, &request, sizeof(request)-sizeof(long), 0);
-//    if (send_result < 0) EXIT();
-
+    int send_result = msgsnd(this->weather_id, &request, sizeof(request)-sizeof(long), 0);
+    if (send_result < 0) EXIT();
 }
 
 weather_response Server::read_weather_response() {
-
-    std::cout<<"Por leer request"<<std::endl;
     weather_response response{};
-//    ssize_t bytes = msgrcv(ID_WEATHER_SERVICE, &response, sizeof(response)-sizeof(long), NO ESTOY SEGURO QUE VA ACA, 0);
-//    if (bytes < 0) EXIT();
+    ssize_t bytes = msgrcv(this->weather_id, &response, sizeof(response)-sizeof(long), SERVICE_RESPONSE_W, 0);
+    if (bytes < 0) EXIT();
     return response;
-
-
 }
 
-
 void Server::send_weather_response(int client_id, weather_response response) {
+    response.mtype = client_id+WEATHER_CODE;
     int send_result = msgsnd(this->client_queue_id, &response, sizeof(response)-sizeof(long), 0);
     if (send_result < 0) EXIT();
 }
 
-void Server::send_currency_response(int client_id, string moneda) {
+void Server::send_currency_request(string moneda) {
+    s_request request{};
+    request.mtype = SERVICE_REQUEST;
+    std::strcpy(request.code, moneda.c_str());
+    int send_result = msgsnd(this->currency_id, &request, sizeof(request)-sizeof(long), 0);
+    if (send_result < 0) EXIT();
+}
+
+currency_response Server::read_currency_response() {
     currency_response response{};
+    ssize_t bytes = msgrcv(this->currency_id, &response, sizeof(response)-sizeof(long), SERVICE_RESPONSE_C, 0);
+    if (bytes < 0) EXIT();
+    return response;
+}
+
+void Server::send_currency_response(int client_id, currency_response response) {
     response.mtype = client_id + CURRENCY_CODE;
-    response.value = 30;
-    std::strcpy(response.coin, moneda.c_str());
     int send_result = msgsnd(this->client_queue_id, &response, sizeof(response)-sizeof(long), 0);
     if (send_result < 0) EXIT();
 }

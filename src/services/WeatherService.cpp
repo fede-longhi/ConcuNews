@@ -44,15 +44,6 @@ void WeatherService::loadDatabase() {
     }
 
     dbfile.close();
-
-
-    //TODO prueba
-    cout << getInfo("BuenosAires").city << endl;
-    cout << getInfo("BuenosAires").temperature << endl;
-    cout << getInfo("BuenosAires").pressure << endl;
-    cout << getInfo("BuenosAires").humidity << endl;
-
-
 }
 
 //Cambiar para que escriba y lea del mismo archivo . Capaz guardar un archivo de backup
@@ -76,15 +67,10 @@ void WeatherService::saveDatabase() {
     }
 
     outputFile.close();
-    cout << "Done!\n";
-
-
 }
 
 void WeatherService::addData(weather_data data, std::string city){
-
     database[city] = data;
-
 }
 
 
@@ -98,7 +84,7 @@ string WeatherService::read_request() {
     ssize_t bytes = msgrcv(this->queue_id, &message, sizeof(message) - sizeof(long), SERVICE_REQUEST, 0);
     if (bytes < 0) EXIT();
 
-    std::cout << "Mensage recibido: " << message.code << '\n';
+    std::cout << "Weather: Mensage recibido: " << message.code << '\n';
 
     return message.code;
 }
@@ -107,7 +93,7 @@ void WeatherService::send_response(weather_response response) {
     response.mtype = SERVICE_RESPONSE_W;
     int send_result = msgsnd(this->queue_id, &response, sizeof(response) - sizeof(long), 0);
     if (send_result < 0) EXIT();
-    std::cout << "Mensage enviado" << std::endl;
+    std::cout << "Weather: Mensage enviado" << std::endl;
 }
 
 weather_response WeatherService::getInfo(std::string city) {
@@ -134,9 +120,8 @@ weather_response WeatherService::getInfo(std::string city) {
 }
 
 void WeatherService::run() {
-//    string i=0;
     string i;
-    //TODO true?
+    //TODO true
     while (true) {
         i = this->read_request();
         weather_response response = this->getInfo(i);

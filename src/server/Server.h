@@ -33,6 +33,9 @@ private:
     int client_queue_id;
     int admin_queue_id;
 
+    int weather_id;
+    int currency_id;
+
     void create_conection_queue();
     void create_client_queue();
     void create_admin_queue();
@@ -52,7 +55,7 @@ private:
     int generate_admin_id();
 public:
 
-    Server();
+    Server(int, int);
     virtual ~Server();
 
     int get_conection_queue_id();
@@ -67,7 +70,7 @@ public:
 
 
     void send_weather_response(int client_id, weather_response response);
-    void send_currency_response(int, string);
+    void send_currency_response(int, currency_response response);
 
     void send_weather_request(string);
     void send_currency_request(string);
