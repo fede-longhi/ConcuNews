@@ -6,10 +6,40 @@
 
 #IncludeRegexTransform: 
 
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
+ctime
+-
+string
+-
+
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/services/CurrencyService.h
+sys/ipc.h
+-
+sys/msg.h
+-
+sys/shm.h
+-
+sys/wait.h
+-
+unistd.h
+-
 iostream
 -
+cstring
+-
+fstream
+-
+set
+-
 map
+-
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
+../utils/utils.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/utils/utils.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/utils/utils.h
+cstring
 -
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/currency_service.cpp
@@ -20,15 +50,47 @@ cstring
 ./src/services/CurrencyService.h
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/services/CurrencyService.h
 
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+ctime
+-
+string
+-
+
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/CurrencyService.cpp
 fstream
 -
 CurrencyService.h
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/CurrencyService.h
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/services/CurrencyService.h
+sys/ipc.h
+-
+sys/msg.h
+-
+sys/shm.h
+-
+sys/wait.h
+-
+unistd.h
+-
 iostream
 -
+cstring
+-
+fstream
+-
+set
+-
 map
+-
+../message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
+../utils/utils.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/utils/utils.h
+cstring
 -
 
