@@ -21,6 +21,8 @@ cstring
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/./src/message/messages.h
 src/client/Cliente.h
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/client/Cliente.h
+src/message/messages.h
+/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/client/Cliente.cpp
 Cliente.h
