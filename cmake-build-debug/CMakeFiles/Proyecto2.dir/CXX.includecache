@@ -55,8 +55,6 @@ string
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/server/Server.cpp
 Server.h
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/server/Server.h
-../message/messages.h
-/home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/message/messages.h
 
 /home/fedelonghi/Facultad/Tecnicas de Prgramacion Concurrente I/Proyecto2/src/server/Server.h
 sys/ipc.h
