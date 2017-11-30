@@ -30,9 +30,6 @@ private:
     s_request read_request();
     weather_response getInfo(string);
     void send_response(weather_response);
-    float getPressure(int);
-    float getHummidity(int);
-    float getTemperature(int);
 
     void loadDatabase();
     void saveDatabase();

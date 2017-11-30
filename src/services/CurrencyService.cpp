@@ -16,6 +16,7 @@ CurrencyService::CurrencyService() {
 
 CurrencyService::~CurrencyService() {
     this->running=false;
+    saveDatabase();
 }
 
 void CurrencyService::create_conection_queue() {

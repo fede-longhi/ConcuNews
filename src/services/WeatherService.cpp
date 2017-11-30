@@ -78,6 +78,7 @@ void WeatherService::addData(weather_data data, std::string city){
 
 WeatherService::~WeatherService() {
     msgctl(this->queue_id, IPC_RMID, NULL);
+    saveDatabase();
 }
 
 s_request WeatherService::read_request() {
@@ -159,19 +160,6 @@ void WeatherService::create_conection_queue() {
 
 int WeatherService::getQueue_id() const {
     return queue_id;
-}
-
-
-float WeatherService::getPressure(int) {
-    return 1024;
-}
-
-float WeatherService::getHummidity(int) {
-    return 10;
-}
-
-float WeatherService::getTemperature(int) {
-    return 30;
 }
 
 void WeatherService::stopRunning() {
