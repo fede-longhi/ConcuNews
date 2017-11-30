@@ -12,20 +12,12 @@ WeatherService::WeatherService() {
 
     loadDatabase();
 
-    //TODO esto aca solo para testear
-    weather_data data1 {};
-
-    data1.temperature = 4005;
-    data1.humidity = 4005;
-    data1.pressure = 4005;
-
-    std::string city = "FinisTerre";
-
-    addData(data1, city);
-
-    saveDatabase();
-
     this->running = true;
+}
+
+WeatherService::~WeatherService() {
+    msgctl(this->queue_id, IPC_RMID, NULL);
+    saveDatabase();
 }
 
 void WeatherService::loadDatabase() {
@@ -54,9 +46,8 @@ void WeatherService::saveDatabase() {
     map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, weather_data>::iterator
             it = database.begin();
 
-
     ofstream outputFile;
-    outputFile.open("./program3data.txt");
+    outputFile.open("./wdb.csv");
 
     while (it != database.end()) {
         std::string city = it->first;
@@ -71,14 +62,9 @@ void WeatherService::saveDatabase() {
     outputFile.close();
 }
 
+
 void WeatherService::addData(weather_data data, std::string city){
     database[city] = data;
-}
-
-
-WeatherService::~WeatherService() {
-    msgctl(this->queue_id, IPC_RMID, NULL);
-    saveDatabase();
 }
 
 s_request WeatherService::read_request() {
@@ -99,16 +85,12 @@ void WeatherService::send_response(weather_response response) {
 weather_response WeatherService::getInfo(std::string city) {
     weather_response response{};
     std::strcpy(response.city, city.c_str());
-
-
     const map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, weather_data>::iterator &pos = database.find(
             city);
     if (pos == database.end()) {
-
         response.pressure = -1;
         response.temperature = -1;
         response.humidity = -1;
-
     } else {
         weather_data data = pos->second;
         response.pressure = data.pressure;

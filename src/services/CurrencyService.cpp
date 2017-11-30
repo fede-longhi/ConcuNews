@@ -8,7 +8,7 @@
 
 CurrencyService::CurrencyService() {
     this->create_conection_queue();
-    loadDatabase();
+    this->loadDatabase();
     addData(17,"dolar");
     saveDatabase();
     this->running=true;
@@ -115,7 +115,7 @@ void CurrencyService::saveDatabase() {
     std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>, float>::iterator it = database.begin();
 
     std::ofstream outputFile;
-    outputFile.open("./program4data.txt");
+    outputFile.open("./cdb.csv");
 
     while (it != database.end()) {
         std::string city = it->first;
