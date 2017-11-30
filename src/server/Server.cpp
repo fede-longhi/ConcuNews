@@ -3,7 +3,7 @@
 //
 
 #include "Server.h"
-#include "../message/messages.h"
+
 
 Server::Server(int weather_id, int currency_id) {
     this->create_conection_queue();
@@ -26,6 +26,18 @@ Server::~Server() {
     this->destroy_mem_running();
 }
 
+int Server::get_client_queue_id() {
+    return this->client_queue_id;
+}
+
+int Server::get_admin_queue_id() {
+    return this->admin_queue_id;
+}
+
+int Server::get_conection_queue_id() {
+    return this->conection_queue_id;
+}
+
 void Server::create_conection_queue() {
     //creo archivo para usar path
     std::ofstream outfile ("queue_file");
@@ -36,12 +48,6 @@ void Server::create_conection_queue() {
 
     this->conection_queue_id = msgget(key, IPC_CREAT|0644);
     if (this->conection_queue_id < 0) EXIT();
-}
-
-void Server::destroy_queues() {
-    msgctl(this->conection_queue_id, IPC_RMID, NULL);
-    msgctl(this->client_queue_id, IPC_RMID, NULL);
-    msgctl(this->admin_queue_id, IPC_RMID, NULL);
 }
 
 void Server::create_client_queue() {
@@ -66,6 +72,12 @@ void Server::create_admin_queue() {
     if (this->admin_queue_id < 0) EXIT();
 }
 
+void Server::destroy_queues() {
+    msgctl(this->conection_queue_id, IPC_RMID, nullptr);
+    msgctl(this->client_queue_id, IPC_RMID, nullptr);
+    msgctl(this->admin_queue_id, IPC_RMID, nullptr);
+}
+
 int Server::generate_client_id() {
     int id = *this->client_id;
     *this->client_id += LAST_PROTECTED_ID;
@@ -78,17 +90,13 @@ int Server::generate_admin_id() {
     return id;
 }
 
-int Server::get_conection_queue_id() {
-    return this->conection_queue_id;
-}
-
 long Server::read_connection_request() {
     connection_request mensaje;
 
     ssize_t bytes = msgrcv(this->conection_queue_id, &mensaje, sizeof(mensaje)-sizeof(long), -LAST_CONNECTION_CODE, 0);
     if (bytes < 0) EXIT();
 
-    std::cout << "Mensage recibido: " << mensaje.mtype << '\n';
+    std::cout << "Server: Mensage recibido: " << mensaje.mtype << '\n';
 
     return mensaje.mtype;
 }
@@ -100,12 +108,11 @@ void Server::send_connection_established(int type, int id, int queue_id) {
     response.queue_id = queue_id;
     int send_result = msgsnd(this->conection_queue_id, &response, sizeof(response)-sizeof(long), 0);
     if (send_result < 0) EXIT();
-    std::cout << "Mensage enviado al cliente con id: "<< response.id << '\n';
+    std::cout << "Server: Mensage enviado al cliente con id: "<< response.id << '\n';
 }
 
 void Server::handle_connection_request() {
     while (this->is_running()){
-        std::cout<<"Esperando conexion..."<<std::endl;
         long type = this->read_connection_request();
         if (type == CONNECTION_REQUEST_ID){
             this->send_connection_established(ESTABLISHED_CONNECTION_ID,
@@ -127,11 +134,10 @@ void Server::handle_connection_request() {
 
 void Server::handle_client_request() {
     while (this->is_running()){
-        std::cout<<"Esperando client request..."<<std::endl;
         service_request request = this->read_client_request(-LAST_PROTECTED_ID);
-        std::cout<<"Request recibido del cliente: "<<request.client_id<<std::endl;
+        std::cout<<"Server: Request recibido del cliente: "<<request.client_id<<std::endl;
         if (request.mtype == WEATHER_CODE){
-            std::cout<<"Solicitud de tiempo"<<std::endl;
+            std::cout<<"Server: Solicitud de tiempo"<<std::endl;
             std::cout<<"Ciudad: "<<request.code<<std::endl;
 
             //Comunicacion con el servicio
@@ -139,9 +145,9 @@ void Server::handle_client_request() {
             weather_response response = this->read_weather_response();
 
             this->send_weather_response(request.client_id, response);
-            std::cout<<"Respuesta enviada"<<std::endl;
+            std::cout<<"Server: Respuesta enviada"<<std::endl;
         }else if (request.mtype == CURRENCY_CODE){
-            std::cout<<"Solicitud de moneda"<<std::endl;
+            std::cout<<"Server: Solicitud de moneda"<<std::endl;
             std::cout<<"Moneda: "<<request.code<<std::endl;
 
             //Comunicacion con el servicio
@@ -149,7 +155,7 @@ void Server::handle_client_request() {
             currency_response response = this->read_currency_response();
 
             this->send_currency_response(request.client_id, response);
-            std::cout<<"Respuesta enviada"<<std::endl;
+            std::cout<<"Server: Respuesta enviada"<<std::endl;
         }else{
             std::cout<<"Error: codigo de mensaje invalido"<<std::endl;
         }
@@ -157,7 +163,6 @@ void Server::handle_client_request() {
 }
 
 service_request Server::read_client_request(int code) {
-    std::cout<<"Por leer request"<<std::endl;
     service_request request{};
     ssize_t bytes = msgrcv(this->client_queue_id, &request, sizeof(request)-sizeof(long), code, 0);
     if (bytes < 0) EXIT();
@@ -167,7 +172,8 @@ service_request Server::read_client_request(int code) {
 void Server::send_weather_request(string ciudad) {
     s_request request{};
     request.mtype = SERVICE_REQUEST;
-    std::strcpy(request.code, ciudad.c_str());
+    request.code = SERVICE_REQUEST;
+    std::strcpy(request.key, ciudad.c_str());
     int send_result = msgsnd(this->weather_id, &request, sizeof(request)-sizeof(long), 0);
     if (send_result < 0) EXIT();
 }
@@ -188,7 +194,8 @@ void Server::send_weather_response(int client_id, weather_response response) {
 void Server::send_currency_request(string moneda) {
     s_request request{};
     request.mtype = SERVICE_REQUEST;
-    std::strcpy(request.code, moneda.c_str());
+    request.code = SERVICE_REQUEST;
+    std::strcpy(request.key, moneda.c_str());
     int send_result = msgsnd(this->currency_id, &request, sizeof(request)-sizeof(long), 0);
     if (send_result < 0) EXIT();
 }
@@ -208,27 +215,53 @@ void Server::send_currency_response(int client_id, currency_response response) {
 
 void Server::handle_admin_request() {
     while (this->is_running()){
-        std::cout<<"Esperando admin request..."<<std::endl;
         admin_request request{};
         ssize_t bytes = msgrcv(this->admin_queue_id, &request,
                                sizeof(request)-sizeof(long), -LAST_ADMIN_PROTECTED_ID, 0);
         if (bytes < 0) EXIT();
-        std::cout<<"Admin request recibido"<<std::endl;
+        std::cout<<"Server: Admin request recibido"<<std::endl;
         if (request.mtype == CLOSE_SERVER){
-            std::cout<<"Cerrando servidor"<<std::endl;
+            std::cout<<"Server: Cerrando servidor"<<std::endl;
             this->stop_running();
         }else if(request.mtype == UPDATE_WEATHER_CODE){
-            std::cout<<"Updating Weather"<<std::endl;
-            //TODO update weather
+            std::cout<<"Server: Updating Weather"<<std::endl;
+            s_request s_req = this->transformServiceRequest(request);
+            this->send_update_weather(s_req);
         }else if(request.mtype == UPDATE_CURRENCY_CODE){
-            std::cout<<"Updating Currency"<<std::endl;
-            //TODO update currency
+            std::cout<<"Server: Updating Currency"<<std::endl;
+            s_request service_request = this->transformServiceRequest(request);
+            this->send_update_currency(service_request);
         }else{
-            std::cout<<"Unknown code"<<std::endl;
-            //TODO update currency
+            std::cout<<"Server: Unknown code"<<std::endl;
         }
     }
 }
+
+s_request Server::transformServiceRequest(admin_request origin) {
+    s_request final{};
+    final.code = origin.code;
+    strcpy(final.key, origin.key);
+    final.hummidity = origin.hummidity;
+    final.pressure = origin.pressure;
+    final.temperature = origin.temperature;
+    final.value = origin.value;
+    return final;
+}
+
+void Server::send_update_weather(s_request request) {
+    request.mtype = SERVICE_REQUEST;
+    request.code = UPDATE_WEATHER_CODE;
+    int send_result = msgsnd(this->weather_id, &request, sizeof(request)-sizeof(long), 0);
+    if (send_result < 0) EXIT();
+}
+
+void Server::send_update_currency(s_request request) {
+    request.mtype = SERVICE_REQUEST;
+    request.code = UPDATE_CURRENCY_CODE;
+    int send_result = msgsnd(this->currency_id, &request, sizeof(request)-sizeof(long), 0);
+    if (send_result < 0) EXIT();
+}
+
 
 void Server::create_id() {
     std::ofstream outfile ("mem_file");
@@ -240,7 +273,7 @@ void Server::create_id() {
     this->shmIdClient = shmget(key, sizeof(int), 0644|IPC_CREAT);
     if (shmIdClient < 0) EXIT();
 
-    void* tmpPtr = shmat(this->shmIdClient, NULL, 0);
+    void* tmpPtr = shmat(this->shmIdClient, nullptr, 0);
     if(tmpPtr != (void*) -1) {
         this->client_id = (int *) tmpPtr;
     }else{
@@ -251,7 +284,7 @@ void Server::create_id() {
 void Server::destroy_mem_client_id() {
     int errorDt = shmdt ( (void *) this->client_id);
     if ( errorDt != -1 ){
-        shmctl (this->shmIdClient, IPC_RMID, NULL);
+        shmctl (this->shmIdClient, IPC_RMID, nullptr);
     }else{
         EXIT();
     }
@@ -260,7 +293,7 @@ void Server::destroy_mem_client_id() {
 void Server::destroy_mem_running(){
     int errorDt = shmdt ( (void *) this->running);
     if ( errorDt != -1 ){
-            shmctl (this->shmIdRunning, IPC_RMID, NULL);
+            shmctl (this->shmIdRunning, IPC_RMID, nullptr);
     }else{
         EXIT();
     }
@@ -304,15 +337,8 @@ void Server::stop_running() {
     int send_result_connection = msgsnd(this->conection_queue_id, &message_connection, sizeof(message_connection)-sizeof(long), 0);
 }
 
-int Server::get_client_queue_id() {
-    return this->client_queue_id;
-}
-
-int Server::get_admin_queue_id() {
-    return this->admin_queue_id;
-}
-
 void Server::create_admin_id() {
+
     std::ofstream outfile ("mem_file");
     outfile.close();
 
@@ -333,7 +359,7 @@ void Server::create_admin_id() {
 void Server::destroy_mem_admin_id() {
     int errorDt = shmdt ( (void *) this->admin_id);
     if ( errorDt != -1 ){
-        shmctl (this->shmIdAdmin, IPC_RMID, NULL);
+        shmctl (this->shmIdAdmin, IPC_RMID, nullptr);
     }else{
         EXIT();
     }

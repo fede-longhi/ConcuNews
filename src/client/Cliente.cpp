@@ -3,9 +3,6 @@
 //
 
 #include "Cliente.h"
-#include "../message/messages.h"
-#include <string>
-#include <iostream>
 
 Cliente::Cliente(){
     this->client_id = -1;
@@ -13,6 +10,8 @@ Cliente::Cliente(){
 }
 
 Cliente::~Cliente() {
+    this->client_id = -1;
+    this->queue_id = -1;
 }
 
 int Cliente::get_id() {
@@ -39,18 +38,13 @@ int Cliente::request_connection() {
 }
 
 void Cliente::read_connection_response() {
-    connection_response mensaje{};
+    connection_response message{};
 
-    ssize_t bytes = msgrcv(this->queue_id, &mensaje, sizeof(mensaje)-sizeof(long), ESTABLISHED_CONNECTION_ID, 0);
+    ssize_t bytes = msgrcv(this->queue_id, &message, sizeof(message)-sizeof(long), ESTABLISHED_CONNECTION_ID, 0);
     if (bytes < 0) EXIT();
 
-    std::cout << "Mensage recibido" << '\n';
-
-    this->client_id = mensaje.id;
-    this->queue_id = mensaje.queue_id; //cambio el queue id para que mande mensajes al client queue
-
-    std::cout<<"Cliente asociado a id: "<< this->client_id <<std::endl;
-    std::cout<<"Direccion de cola: "<< this->queue_id <<std::endl;
+    this->client_id = message.id;
+    this->queue_id = message.queue_id; //cambio el queue id para que mande mensajes al client queue
 }
 
 void Cliente::establish_connection() {
@@ -89,18 +83,14 @@ weather_response Cliente::read_weather_response() {
     ssize_t bytes = msgrcv(this->queue_id, &message, sizeof(message)-sizeof(long), this->client_id + WEATHER_CODE, 0);
     if (bytes < 0) EXIT();
 
-    std::cout << "Leo Weather Response" << std::endl;
-
     return message;
 }
 
 currency_response Cliente::read_currency_response() {
-    currency_response message;
+    currency_response message{};
 
     ssize_t bytes = msgrcv(this->queue_id, &message, sizeof(message)-sizeof(long), this->client_id+CURRENCY_CODE, 0);
     if (bytes < 0) EXIT();
-
-    std::cout << "Leo Currency Response" << std::endl;
 
     return message;
 }

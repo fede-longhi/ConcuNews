@@ -19,10 +19,10 @@
 /* *********************************** */
 
 /* ********** Admin Messages ********* */
-#define UPDATE_WEATHER_CODE 1
-#define UPDATE_CURRENCY_CODE 2
-#define CLOSE_SERVER 3
-#define LAST_ADMIN_PROTECTED_ID 3
+#define UPDATE_WEATHER_CODE 2
+#define UPDATE_CURRENCY_CODE 3
+#define CLOSE_SERVER 4
+#define LAST_ADMIN_PROTECTED_ID 4
 /* *********************************** */
 
 /* ********** Client Messages ******** */
@@ -51,7 +51,7 @@ typedef struct {
 }connection_response;
 
 typedef struct {
-    long mtype; //service_request
+    long mtype;
     char code[N];
     int client_id;
 }service_request;
@@ -64,12 +64,6 @@ typedef struct {
     float pressure;
     float humidity;
 }weather_response;
-
-typedef struct {
-    float temperature;
-    float pressure;
-    float humidity;
-}weather_data;
 
 typedef struct {
     long mtype;
@@ -86,18 +80,29 @@ typedef struct {
 typedef struct {
     long mtype;
     int code;
-    char city[N];
+    char key[N];
     float temperature;
     float pressure;
     float hummidity;
     float value;
-    char coin[N];
 }admin_request;
 
 typedef struct{
     long mtype;
-    char code[N];
+    int code;
+    char key[N];
+    float temperature;
+    float pressure;
+    float hummidity;
+    float value;
 }s_request;
+
+
+typedef struct {
+    float temperature;
+    float pressure;
+    float humidity;
+}weather_data;
 
 
 #endif //PROYECTO2_MESSAGES_H

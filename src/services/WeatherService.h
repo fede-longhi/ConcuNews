@@ -24,9 +24,10 @@ class WeatherService {
 private:
     int queue_id;
     std::map<std::string,weather_data> database;
+    bool running;
 
     void create_conection_queue();
-    string read_request();
+    s_request read_request();
     weather_response getInfo(string);
     void send_response(weather_response);
     float getPressure(int);
@@ -37,7 +38,7 @@ private:
     void saveDatabase();
     void addData(weather_data data, string city);
 
-
+    bool isRunning();
 
 public:
     WeatherService();
@@ -48,6 +49,7 @@ public:
 
     virtual ~WeatherService();
 
+    void stopRunning();
 };
 
 

@@ -19,6 +19,8 @@ int main(int argc, char** argv) {
 
     auto *service = new CurrencyService();
 
+    std::cout<<"Make request with id: "<<service->getQueue_id()<<std::endl;
+
     service->run();
 
     delete(service);

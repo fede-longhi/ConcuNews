@@ -24,6 +24,8 @@ WeatherService::WeatherService() {
     addData(data1, city);
 
     saveDatabase();
+
+    this->running = true;
 }
 
 void WeatherService::loadDatabase() {
@@ -78,15 +80,12 @@ WeatherService::~WeatherService() {
     msgctl(this->queue_id, IPC_RMID, NULL);
 }
 
-string WeatherService::read_request() {
-    s_request message;
-
+s_request WeatherService::read_request() {
+    s_request message{};
     ssize_t bytes = msgrcv(this->queue_id, &message, sizeof(message) - sizeof(long), SERVICE_REQUEST, 0);
     if (bytes < 0) EXIT();
-
-    std::cout << "Weather: Mensage recibido: " << message.code << '\n';
-
-    return message.code;
+    std::cout << "Weather: Mensage recibido: " << message.key << '\n';
+    return message;
 }
 
 void WeatherService::send_response(weather_response response) {
@@ -120,13 +119,30 @@ weather_response WeatherService::getInfo(std::string city) {
 }
 
 void WeatherService::run() {
-    string i;
-    //TODO true
-    while (true) {
-        i = this->read_request();
-        weather_response response = this->getInfo(i);
-        this->send_response(response);
+    while (this->isRunning()) {
+        s_request request = this->read_request();
+        if(request.code == SERVICE_REQUEST){
+            weather_response response = this->getInfo(request.key);
+            this->send_response(response);
+        }else if(request.code == UPDATE_WEATHER_CODE){
+            std::cout<<"Weather: Actualizando datos del tiempo"<<std::endl;
+            weather_data data{};
+            data.pressure = request.pressure;
+            data.humidity = request.hummidity;
+            data.temperature = request.temperature;
+            addData(data, request.key);
+            saveDatabase();
+        }else if(request.code == CLOSE_SERVER){
+            this->stopRunning();
+        }else{
+            std::cout<<"Weather: Codigo incorrecto"<<std::endl;
+        }
+
     }
+}
+
+bool WeatherService::isRunning() {
+    return this->running;
 }
 
 void WeatherService::create_conection_queue() {
@@ -156,4 +172,8 @@ float WeatherService::getHummidity(int) {
 
 float WeatherService::getTemperature(int) {
     return 30;
+}
+
+void WeatherService::stopRunning() {
+    this->running = false;
 }

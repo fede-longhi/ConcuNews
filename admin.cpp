@@ -7,6 +7,7 @@
 
 #include "./src/message/messages.h"
 #include "src/admin/Admin.h"
+#include "src/message/messages.h"
 
 
 using namespace std;
@@ -29,22 +30,41 @@ int main(int argc, char** argv) {
     admin->establish_connection();
     std::cout << "Conexion establecida - id asociado: "<< admin->get_id() << std::endl;
 
-    std::cout << "Update Weather" <<std::endl;
-    admin_request weather{};
-    weather.pressure = 1024;
-    weather.temperature = 23.4;
-    std::strcpy(weather.city, "Buenos Aires");
-    weather.hummidity = 20.3;
-    admin->update_weather(weather);
-
-    std::cout << "Update Currency" <<std::endl;
-    admin_request currency{};
-    currency.value = 10.2;
-    std::strcpy(weather.city, "Dolar");
-    admin->update_currency(currency);
-
-    std::cout << "Cerrando servidor" << std::endl;
-    admin->close_server();
+    bool cerrar = false;
+    while (not cerrar){
+        std::cout<<"Requests al servidor\n"<<"1-Update Weather\n2-Update Currency\n3-Cerrar Servidor\n4-Cerrar Administrador"<<std::endl;
+        int opt;
+        cin>>opt;
+        if (opt==1){
+            admin_request weather{};
+            std::cout<<"Actualizando datos del tiempo..."<<std::endl;
+            std::cout<<"Elija la ciudad\n::";
+            cin>>weather.key;
+            std::cout<<"Temperatura en "<<weather.key<<": ";
+            cin>>weather.temperature;
+            std::cout<<"Presion en "<<weather.key<<": ";
+            cin>>weather.pressure;
+            std::cout<<"Humedad en "<<weather.key<<": ";
+            cin>>weather.hummidity;
+            admin->update_weather(weather);
+        }else if(opt==2){
+            admin_request currency{};
+            std::cout<<"Update Currency"<<std::endl;
+            std::cout<<"Elija una moneda\n::";
+            cin>>currency.key;
+            std::cout<<"Valor de "<<currency.key<<": ";
+            cin>>currency.value;
+            admin->update_currency(currency);
+        }else if(opt==3){
+            std::cout << "Cerrando servidor" << std::endl;
+            admin->close_server();
+            cerrar = true;
+        }else if(opt==4){
+            cerrar = true;
+        }else{
+            std::cout<<"Opcion Invalida"<<std::endl;
+        }
+    }
 
     delete(admin);
 

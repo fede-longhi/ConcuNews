@@ -53,6 +53,9 @@ private:
     int generate_client_id();
 
     int generate_admin_id();
+
+    s_request transformServiceRequest(admin_request);
+
 public:
 
     Server(int, int);
@@ -78,6 +81,8 @@ public:
     weather_response read_weather_response();
     currency_response read_currency_response();
 
+    void send_update_weather(s_request);
+    void send_update_currency(s_request);
 
     void handle_client_request();
     void handle_admin_request();
